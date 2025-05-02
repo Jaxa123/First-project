@@ -1,0 +1,15 @@
+.main-nav-bar-wrapper {
+    background-color: black;
+    box-shadow: 0 0 20px #00ff15;
+
+    a {
+        color: #fff;
+
+        &:hover {
+            background-color: #00ff15;
+            border-radius: 10px;
+            color: black;
+            transition: 0.5s;
+        }
+    }
+}
