@@ -1,106 +1,6 @@
-@import '@/assets/styles/globals.scss';
+@import '@/assets/styles/globals.scss'; 
 
-.auth-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: $dark;
-    padding: 2rem;
-    margin: 0 auto;
-    color: $white;
-
-    h1 {
-        font-size: 2.5rem;
-        margin-bottom: 2rem;
-        background: $red-gradient;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-align: center;
-    }
-
-    form {
-        width: 100%;
-        max-width: 400px;
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
-        border-radius: 20px;
-        padding: 2rem;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .form-field {
-        margin-bottom: 1.5rem;
-
-        label {
-            display: block;
-            color: $light-gray;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        input {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.05);
-            color: $white;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-
-            &:focus {
-                outline: none;
-                border-color: $red;
-                box-shadow: 0 0 0 2px rgba(255, 86, 187, 0.2);
-            }
-
-            &::placeholder {
-                color: $dark-gray;
-            }
-        }
-
-        button {
-            width: 100%;
-            padding: 1rem;
-            border: none;
-            border-radius: 10px;
-            background: $red-gradient;
-            color: $white;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-
-            &:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 5px 15px rgba(255, 86, 187, 0.3);
-            }
-        }
-    }
-
-    p {
-        margin-top: 1.5rem;
-        text-align: center;
-        color: $dark-gray;
-
-        small {
-            font-size: 0.9rem;
-        }
-
-        a {
-            color: $red;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-
-            &:hover {
-                color: lighten($red, 10%);
-            }
-        }
-    }
-}
+/* Основные стили */
 * {
     padding: 0;
     margin: 0;
@@ -108,66 +8,165 @@
     transition: 0.5s;
     color: white;
 }
+
 body {
     background-color: black;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
-main {
-    margin: 200px;
+
+/* Стили для контейнера авторизации */
+.auth-container {
     margin: 0 auto;
-    margin-top: 10%;
+    margin-top: 5%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 350px;
-    width: 400px;
+    height: auto;
+    min-height: 350px;
+    width: 90%;
+    max-width: 400px;
     border: 1px solid #00ff15;
     border-radius: 15px;
     box-shadow: 0 0 15px #00ff15;
+    padding: 20px;
 }
-h1 {
-    margin-bottom: 20px;
-}
-input {
-    padding: 10px;
-    margin-bottom: 5px;
-    background-color: #333;
-    border: none;
-    box-shadow:  0 0 20px #00ff15;
-    border-radius: 15px;
-    width: 170px;
-    height: 30px;
 
+.auth-container:hover {
+    box-shadow: 0 0 20px #00ff15, 0 0 20px #00ff15;
 }
-input:focus {
-    outline: none;
-    box-shadow: 0 0 20px #00ff15, 0 0 20px #00ff15 ;
+
+/* Заголовок и текст */
+.auth-container h1 {
+    margin-bottom: 20px;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    text-align: center;
 }
-button {
+
+.auth-container p {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.auth-container a {
+    color: #00ff15;
+    text-decoration: none;
+}
+
+/* Форма и поля ввода */
+.form-field {
+    margin-bottom: 15px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field-2 {
+    margin-bottom: 15px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.form-field label {
+    margin-bottom: 5px;
+}
+
+.form-field input {
     padding: 10px;
     background-color: #333;
     border: none;
     box-shadow: 0 0 20px #00ff15;
     border-radius: 15px;
-    width: 170px;
-    height: 30px;
+    width: 100%;
+    height: 40px;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+.form-field input:focus {
+    outline: none;
+    box-shadow: 0 0 20px #00ff15, 0 0 20px #00ff15;
+}
+
+.form-field-2 input:focus {
+    outline: none;
+    box-shadow: 0 0 20px #00ff15, 0 0 20px #00ff15;
+}
+
+/* Кнопки */
+.form-field button {
+    padding: 10px;
+    background-color: #333;
+    border: none;
+    box-shadow: 0 0 20px #00ff15;
+    border-radius: 15px;
+    width: 100%;
+    height: 40px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: clamp(0.9rem, 2vw, 1rem);
 }
-button:hover {
+
+.form-field button:hover {
     background-color: #00ff15;
     color: black;
-    box-shadow: 0 0 20px #00ff15, 0 0 20px #00ff15 ;
+    box-shadow: 0 0 20px #00ff15, 0 0 20px #00ff15;
 }
-p {
-    margin-top: 20px;
+
+.form-field-2 button:hover {
+    background-color: #00ff15;
+    color: black;
+    box-shadow: 0 0 20px #00ff15, 0 0 20px #00ff15;
 }
-a {
-    color: #00ff15;
-    text-decoration: none;
+
+/* Адаптация для компонента регистрации */
+.auth-signup-container {
+    min-height: 520px;
 }
-main:hover {
-    box-shadow: 0 0 20px #00ff15, 0 0 20px #00ff15 ;
+
+.form-field-2 button {
+    padding: 10px;
+    background-color: #333;
+    border: none;
+    box-shadow: 0 0 20px #00ff15;
+    border-radius: 15px;
+    width: 100%;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+/* Медиа-запросы для адаптивности */
+@media (max-width: 768px) {
+    .auth-container {
+        margin-top: 10%;
+        width: 95%;
+        padding: 15px;
+    }
+
+    .form-field-2 {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-container {
+        margin-top: 15%;
+        width: 98%;
+        padding: 10px;
+    }
+
+    .form-field input,
+    .form-field button,
+    .form-field-2 button {
+        height: 35px;
+    }
 }

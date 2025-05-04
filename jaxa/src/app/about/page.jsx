@@ -1,12 +1,69 @@
-function About() {
-    return ( 
-        <>
-            <h1>About</h1>
-            <p>This is the about page of our website.</p>
-            <p>We are a company that specializes in providing high-quality products and services to our customers.</p>
-            <p>Our mission is to deliver exceptional value and exceed customer expectations.</p>
-        </>
-     );
-}
+'use client';
 
-export default About;
+import Link from 'next/link';
+import './page.scss';
+
+export default function About() {
+    return (
+        <div className="about-container">
+            <div className="about-hero">
+                <h1>О нас</h1>
+                <p>Мы - команда профессионалов, создающая инновационные решения</p>
+            </div>
+
+            <div className="about-content">
+                <section className="mission-section">
+                    <h2>Наша миссия</h2>
+                    <p>
+                        Мы стремимся создавать передовые технологические решения, которые помогают нашим клиентам достигать
+                        своих целей и развивать бизнес. Наша команда объединяет экспертов в различных областях, чтобы
+                        предоставлять комплексные и эффективные решения.
+                    </p>
+                </section>
+
+                <section className="values-section">
+                    <h2>Наши ценности</h2>
+                    <div className="values-grid">
+                        <div className="value-card">
+                            <h3>Инновации</h3>
+                            <p>
+                                Мы постоянно ищем новые идеи и подходы, чтобы оставаться на переднем крае технологий и
+                                предлагать нашим клиентам лучшие решения.
+                            </p>
+                        </div>
+                        <div className="value-card">
+                            <h3>Качество</h3>
+                            <p>
+                                Мы уделяем особое внимание качеству нашей работы, стремясь к совершенству во всем, что
+                                делаем.
+                            </p>
+                        </div>
+                        <div className="value-card">
+                            <h3>Клиентоориентированность</h3>
+                            <p>
+                                Мы ставим потребности наших клиентов на первое место и работаем над тем, чтобы превзойти их
+                                ожидания.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="team-section">
+                    <h2>Наша команда</h2>
+                    <p>
+                        Наша команда состоит из опытных профессионалов с различным опытом и экспертизой. Мы объединяем
+                        усилия для создания инновационных решений и достижения выдающихся результатов для наших клиентов.
+                    </p>
+                </section>
+
+                <section className="cta-section">
+                    <h2>Хотите узнать больше?</h2>
+                    <p>Свяжитесь с нами для обсуждения вашего проекта</p>
+                    <Link href="/contact" className="cta-btn">
+                        Связаться с нами
+                    </Link>
+                </section>
+            </div>
+        </div>
+    );
+}

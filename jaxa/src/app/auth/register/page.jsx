@@ -1,110 +1,100 @@
-import "../style.scss"
-import Link from "next/link"
+"use client"
+import '../style.scss';
+import Link from "next/link";
+import { createUserWithEmailAndPassword } from "firebase/auth"
+import { useState } from "react"
+import { auth } from "@/firebase/config"
+import { toast } from 'react-toastify'
+import { useRouter } from 'next/navigation'
+import './page.scss';
 
-function Register() {
-    const [formData, setFormData] = useState({
-        username: "",
-        email: "",
-        password: "",
-        password2: "",
-    })
-    const router = useRouter()
-    function handleFormChange(e) {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        })
-    }
+export default function Register() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+    const router = useRouter();
 
-    function submitForm(e) {
-        e.preventDefault()
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
 
-        for (let key in formData) {
-            if (formData[key] === "") {
-                toast.error("Please fill in all fields", { theme: "dark" })
-                return
-            }
+        if (password !== confirmPassword) {
+            toast.error('Пароли не совпадают');
+            setLoading(false);
+            return;
         }
 
-        if (formData.password !== formData.password2) {
-            toast.error("Passwords do not match", { theme: "dark" })
-            return
+        try {
+            await createUserWithEmailAndPassword(auth, email, password);
+            toast.success('Регистрация успешна');
+            router.push('/profile');
+        } catch (error) {
+            toast.error('Ошибка регистрации: ' + error.message);
+        } finally {
+            setLoading(false);
         }
-
-        createUserWithEmailAndPassword(auth, formData.email, formData.password)
-            .then((userCredential) => {
-                const user = userCredential.user
-                toast.success("Account created successfully!", { theme: "dark" })
-                alert("Account created successfully!")
-                router.push('/auth/login')
-            })
-            .catch((error) => {
-                toast.error(error.message, { theme: "dark" })
-                alert(error.message)
-            })
-    }
-
+    };
 
     return (
+        <div className="auth-container">
+            <div className="auth-card">
+                <div className="auth-header">
+                    <h1>Регистрация</h1>
+                    <p>Создайте новый аккаунт</p>
+                </div>
 
-        <div className="auth-container auth-signup-container">
-            <h1>Sign Up</h1>
-            <form onSubmit={submitForm}>
-                <div className="form-field">
-                    <label htmlFor="username">Username</label>
-                    <input
-                        id="username"
-                        type="text"
-                        placeholder="Username"
-                        name="username"
-                        onChange={handleFormChange}
-                        required
-                    />
+                <form onSubmit={handleSubmit} className="auth-form">
+                    <div className="form-group">
+                        <label htmlFor="email">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            placeholder="Введите ваш email"
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="password">Пароль</label>
+                        <input
+                            type="password"
+                            id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            placeholder="Введите пароль"
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="confirmPassword">Подтвердите пароль</label>
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            required
+                            placeholder="Подтвердите пароль"
+                        />
+                    </div>
+
+                    <button type="submit" className="submit-btn" disabled={loading}>
+                        {loading ? 'Загрузка...' : 'Зарегистрироваться'}
+                    </button>
+                </form>
+
+                <div className="auth-footer">
+                    <p>
+                        Уже есть аккаунт?{' '}
+                        <Link href="/auth/login" className="link">
+                            Войти
+                        </Link>
+                    </p>
                 </div>
-                <div className="form-field">
-                    <label htmlFor="email">Email</label>
-                    <input
-                        id="email"
-                        type="email"
-                        placeholder="Email"
-                        name="email"
-                        onChange={handleFormChange}
-                        required
-                    />
-                </div>
-                <div className="form-field">
-                    <label htmlFor="password">Password</label>
-                    <input
-                        id="password"
-                        type="password"
-                        placeholder="Password"
-                        name="password"
-                        onChange={handleFormChange}
-                        required
-                    />
-                </div>
-                <div className="form-field">
-                    <label htmlFor="password2">Password confirmation</label>
-                    <input
-                        id="password2"
-                        type="password"
-                        placeholder="Password confirmation"
-                        name="password2"
-                        onChange={handleFormChange}
-                        required
-                    />
-                </div>
-                <div className="form-field">
-                    <button type="submit">Create account</button>
-                </div>
-            </form>
-            <p>
-                <small>
-                    Already have an account? <Link href="/auth/login">Login</Link>
-                </small>
-            </p>
+            </div>
         </div>
-    )
+    );
 }
-
-export default Register;
