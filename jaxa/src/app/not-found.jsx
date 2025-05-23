@@ -17,10 +17,4 @@ export default function NotFound() {
             </div>
         </div>
     );
-}
-
-// Это необходимо для Next.js 13+
-export const metadata = {
-    title: 'Страница не найдена',
-    description: 'Страница не существует или была перемещена',
-}; 
+} 
