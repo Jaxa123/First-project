@@ -1,14 +1,23 @@
 import "../assets/styles/globals.scss"
-import NavBar from "./components/Nav"
+import Nav from "./components/Nav/index"
+import Footer from "./components/Footer"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+export const metadata = {
+  title: 'JAXA - Инновационные решения',
+  description: 'Инновационные решения для цифрового будущего',
+};
+
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={"lending-page-wrapper"}>
-        <NavBar />
-        {children}
+    <html lang="ru">
+      <body>
+        <Nav />
+        <main>
+          {children}
+        </main>
+        <Footer />
         <ToastContainer
           position="top-right"
           autoClose={3000}
